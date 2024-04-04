@@ -16,9 +16,16 @@ place to
 
 [Dockerfile](https://github.com/SeldonIO/MLServer/blob/master/Dockerfile)
 
-go to [runtimes](https://github.com/SeldonIO/MLServer/blob/master/Dockerfile#L8)
-
+1. copy directory
 ```
+$ cp /onnx mlserver/runtimes
+```
+2. update [Dockerfile](https://github.com/SeldonIO/MLServer/blob/master/Dockerfile#L8)
+```bash
 COPY ../onnx ./runtimes/onnx
 ```
-update poetry https://github.com/SeldonIO/MLServer/blob/master/poetry.lock 
+3. insert in [pyproject.toml](https://github.com/SeldonIO/MLServer/blob/master/pyproject.toml#L114)
+```
+mlserver-onnx = {path = "./runtimes/onnx", develop = true}
+```
+4. update poetry https://github.com/SeldonIO/MLServer/blob/master/poetry.lock 
